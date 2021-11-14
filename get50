@@ -25,14 +25,15 @@ def main():
     
     tempDir = tempfile.mkdtemp()
     tempLocation = f'{tempDir}/{assignment}'
-    destination = f'/workspaces/{os.getenv("RepositoryName")}/'    
+    currentDir = os.getcwd()
+    destination = f'{currentDir}/'    
     repo_url = f'git@github.com:{GH_CLASSROOM}/{assignment}.git'
 
     # Make sure user does not already downloaded the assignment
     check_cwd(destination, assignment)
 
     try:
-        print(green(f'Downloading assignment `{assignment}` to your Codespace...'))
+        print(green(f'Downloading assignment `{assignment}` to your current directory...'))
         if (args.verbose):
             os.system(f'GIT_SSH_COMMAND="ssh -v" git clone --progress --verbose {repo_url} {tempLocation}')
         else:
